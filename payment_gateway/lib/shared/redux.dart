@@ -1,6 +1,6 @@
-import '../models/card_details.dart';
+import 'package:redux/redux.dart';
 
-// TODO: Explore this more and how to integrate it into my app
+import '../features/card_capture/models/card_details.dart';
 
 class AddCardAction {
   final CardDetails cardDetails;
@@ -13,6 +13,7 @@ AppState appReducer(AppState state, dynamic action) {
   if (action is AddCardAction) {
     return state.copyWith(
       cardDetails: action.cardDetails,
+      // TODO: Save the card in storage here
     );
   }
   return state;
@@ -22,9 +23,9 @@ AppState appReducer(AppState state, dynamic action) {
 class AppState {
   final CardDetails cardDetails;
 
-  AppState({this.cardDetails});
+  AppState({required this.cardDetails});
 
-  AppState copyWith({CardDetails cardDetails}) {
+  AppState copyWith({required CardDetails cardDetails}) {
     return AppState(
       cardDetails: cardDetails ?? this.cardDetails,
     );
@@ -34,5 +35,5 @@ class AppState {
 // Create Redux store
 final store = Store<AppState>(
   appReducer,
-  initialState: AppState(cardDetails: null),
+  initialState: AppState(cardDetails: CardDetails('', '', '', '')),
 );
