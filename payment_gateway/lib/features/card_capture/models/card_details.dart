@@ -11,13 +11,19 @@ class CardDetails {
     this.country,
   );
 
-  @override
-  String toString() {
-    return 'CardDetails -> {number: $number, type: $type, cvv: $cvv, country: $country}';
-  }
+  // @override
+  // String toString() {
+  //   return 'CardDetails -> {number: $number, type: $type, cvv: $cvv, country: $country}';
+  // }
 }
 
-enum CardType {
-  CREDIT,
-  DEBIT
-}
+// enum CardType {
+//   Master,
+//   Visa,
+//   Verve,
+//   Discover,
+//   AmericanExpress,
+//   DinersClub,
+//   Jcb,
+//   Other,
+// }

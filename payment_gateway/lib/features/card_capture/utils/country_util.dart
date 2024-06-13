@@ -1,0 +1,30 @@
+class Countries {
+  static List<String> countries = [
+    'Argentina',
+    'Brazil',
+    'Canada',
+    'Denmark',
+    'Egypt',
+    'France',
+    'Germany',
+    'Hungary',
+    'Italy',
+    'Japan',
+    'Kenya',
+    'Lebanon',
+    'Mexico',
+    'Norway',
+    'Oman',
+    'Portugal',
+    'Qatar',
+    'Russia',
+    'Spain',
+    'Turkey',
+    'Ukraine',
+    'Vietnam',
+    'Wales',
+    'Xinjiang',
+    'Yemen',
+    'Zimbabwe'
+  ];
+}

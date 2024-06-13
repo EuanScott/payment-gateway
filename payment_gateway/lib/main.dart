@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:redux/redux.dart';
 
-import './features/card_capture/card_capture.dart';
-import './features/card_history/card_history.dart';
-import './features/country_listing/country_listing.dart';
+import 'features/card_capture/ui/card_capture.dart';
+import 'features/card_capture/ui/card_history.dart';
+import 'features/card_capture/ui/country_listing.dart';
 import 'shared/redux.dart';
 
 void main() {
@@ -21,6 +21,16 @@ class MyApp extends StatelessWidget {
     return StoreProvider(
         store: store,
         child: MaterialApp(
+          // TODO: See about adding a more detailed theming here
+          theme: ThemeData(
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    Theme.of(context).primaryColor),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              ),
+            ),
+          ),
           title: 'Flutter Card App',
           initialRoute: '/',
           routes: {
