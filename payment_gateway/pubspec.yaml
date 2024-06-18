@@ -13,6 +13,9 @@ dependencies:
   cupertino_icons: ^1.0.6
   redux: ^5.0.0
   flutter_redux: ^0.10.0
+  flutter_secure_storage: ^9.2.2
+  mockito: ^5.4.4
+  credit_card_scanner: ^1.0.5
 
 dev_dependencies:
   flutter_test:
