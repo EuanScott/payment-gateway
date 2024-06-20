@@ -1,8 +1,11 @@
+library card_capture;
+
 import 'dart:convert';
 
 import 'package:credit_card_scanner/credit_card_scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:payment_gateway/utils/country_util.dart';
 
 import '../../models/card_details.dart';
@@ -11,7 +14,8 @@ import '../../utils/card_util.dart';
 import '../../utils/secure_storage.dart';
 import '../common/snackbar.dart';
 
-// TODO: Move this out to `part of` directives
+part 'widgets/_card_capture_form.dart';
+
 class CardCapturePage extends StatefulWidget {
   const CardCapturePage({super.key});
 
@@ -24,7 +28,7 @@ class _CardCapturePageState extends State<CardCapturePage> {
 
   final _formKey = GlobalKey<FormState>();
   MyCardDetails myCardDetails = MyCardDetails('', '', '', '');
-  final storage = FlutterSecureStorageImpl();
+  final storage = FlutterSecureStorageImpl(const FlutterSecureStorage());
 
   final FieldController _numberField = FieldController();
   final FieldController _cvvField = FieldController();
@@ -35,8 +39,7 @@ class _CardCapturePageState extends State<CardCapturePage> {
   //region Helper Methods
 
   Future<void> _scanCard() async {
-    CardDetails? cardDetails =
-        await CardScanner.scanCard();
+    CardDetails? cardDetails = await CardScanner.scanCard();
     if (!mounted || cardDetails == null) return;
     _numberField.controller.text = cardDetails.cardNumber;
     _updateCardDetails(cardDetails.cardNumber);
@@ -61,9 +64,7 @@ class _CardCapturePageState extends State<CardCapturePage> {
       }
     }
 
-
-
-    if(await _checkIfCardExits(myCardDetails)) {
+    if (await _checkIfCardExits(myCardDetails)) {
       SnackBarHelper.showSnackBar(context, 'Card details already exist');
     }
 
@@ -97,133 +98,24 @@ class _CardCapturePageState extends State<CardCapturePage> {
 
   //endregion
 
+  //region UI Build
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Add Card')),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: Container(
-                            margin: const EdgeInsets.only(right: 8.0),
-                            // Add margin here
-                            child: TextFormField(
-                              controller: _numberField.controller,
-                              decoration: InputDecoration(
-                                labelText: 'Number',
-                                border: const OutlineInputBorder(),
-                                errorText: _numberField.error.isEmpty
-                                    ? null
-                                    : _cvvField.error,
-                              ),
-                              keyboardType: TextInputType.number,
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.allow(
-                                    RegExp(r'[0-9]')),
-                              ],
-                              maxLength: 16,
-                              onChanged: (value) => _updateCardDetails(value),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            margin: const EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              myCardDetails.type.toString(),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16.0),
-                    TextFormField(
-                      controller: _cvvField.controller,
-                      decoration: InputDecoration(
-                        labelText: 'CVV',
-                        border: const OutlineInputBorder(),
-                        errorText:
-                            _cvvField.error.isEmpty ? null : _cvvField.error,
-                      ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                      ],
-                      maxLength: 3,
-                      onChanged: (value) {
-                        setState(() {
-                          myCardDetails.cvv = value;
-                          _cvvField.error = '';
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 16.0),
-                    TextFormField(
-                      controller: _addressField.controller,
-                      decoration: InputDecoration(
-                        labelText: 'Country',
-                        border: const OutlineInputBorder(),
-                        errorText: _addressField.error.isEmpty
-                            ? null
-                            : _addressField.error,
-                      ),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.allow(RegExp(r'[A-Za-z]'))
-                      ],
-                      onChanged: (value) {
-                        setState(() {
-                          myCardDetails.country = value;
-                          _addressField.error = '';
-                        });
-                      },
-                    ),
-                    const SizedBox(height: 16.0),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                _scanCard();
-                              },
-                              child: const Text('Scan'),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 8.0),
-                            child: ElevatedButton(
-                              onPressed: () => _submitCardDetails(),
-                              child: const Text('Submit'),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
+      body: CardCaptureForm(
+        _numberField,
+        _cvvField,
+        _addressField,
+        myCardDetails,
+        _formKey,
+        _updateCardDetails,
+        _submitCardDetails,
+        _scanCard,
       ),
     );
   }
+
+//endregion
 }

@@ -1,6 +1,7 @@
 library country_listing;
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../utils/country_util.dart';
 import '../../utils/secure_storage.dart';
@@ -17,7 +18,7 @@ class CountryListPage extends StatefulWidget {
 
 class _CountryListState extends State<CountryListPage> {
   TextEditingController controller = TextEditingController();
-  final storage = FlutterSecureStorageImpl();
+  final storage = FlutterSecureStorageImpl(const FlutterSecureStorage());
 
   //region Helper Methods
 
@@ -26,8 +27,6 @@ class _CountryListState extends State<CountryListPage> {
       Countries.bannedCountries.add(country);
       Countries.bannedCountries.sort();
     });
-
-    // TODO: Should this be saved in (not secure) storage as well?
 
     SnackBarHelper.showSnackBar(context, '$country is now an allowed country.');
   }

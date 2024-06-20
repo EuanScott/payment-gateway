@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../../models/card_details.dart';
 import '../../utils/secure_storage.dart';
@@ -17,24 +18,13 @@ class CardHistoryPage extends StatefulWidget {
 
 class _CardHistoryState extends State<CardHistoryPage> {
   final List<MyCardDetails> capturedCards = [];
-  final storage = FlutterSecureStorageImpl();
-
-  //region Lifecycle Methods
-
-  @override
-  void initState() {
-    super.initState();
-    _loadCardData();
-  }
-
-  //endregion
+  final storage = FlutterSecureStorageImpl(const FlutterSecureStorage());
 
   //region Helper Methods
 
   Future<List<MyCardDetails>> _loadCardData() async {
     List<String> keys = await storage.readAllKeys();
 
-    // TODO: Figure out why this is displaying duplicates
     for (String key in keys) {
       String? jsonData = await storage.read(key);
       if (jsonData != null) {

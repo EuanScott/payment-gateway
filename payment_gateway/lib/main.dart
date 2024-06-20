@@ -39,7 +39,6 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // TODO: See about implementing my own theming
       theme: ThemeData(
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(

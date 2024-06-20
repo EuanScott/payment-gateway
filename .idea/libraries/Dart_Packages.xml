@@ -163,13 +163,6 @@
             </list>
           </value>
         </entry>
-        <entry key="flutter_redux">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_redux-0.10.0/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="flutter_secure_storage">
           <value>
             <list>
@@ -380,13 +373,6 @@
             </list>
           </value>
         </entry>
-        <entry key="redux">
-          <value>
-            <list>
-              <option value="$USER_HOME$/.pub-cache/hosted/pub.dev/redux-5.0.0/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="sky_engine">
           <value>
             <list>
@@ -517,7 +503,6 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/file-7.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/fixnum-1.1.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_lints-3.0.2/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_redux-0.10.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_secure_storage-9.2.2/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_secure_storage_linux-1.2.1/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/flutter_secure_storage_macos-3.1.2/lib" />
@@ -546,7 +531,6 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/platform-3.1.5/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/plugin_platform_interface-2.1.8/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/pub_semver-2.1.4/lib" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/redux-5.0.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/source_gen-1.5.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/source_span-1.10.0/lib" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/stack_trace-1.11.1/lib" />
