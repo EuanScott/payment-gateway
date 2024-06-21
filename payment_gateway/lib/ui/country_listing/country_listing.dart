@@ -28,7 +28,7 @@ class _CountryListState extends State<CountryListPage> {
       Countries.bannedCountries.sort();
     });
 
-    SnackBarHelper.showSnackBar(context, '$country is now an allowed country.');
+    SnackBarHelper.showSnackBar(context, '$country is now a banned country.');
   }
 
   void _deleteCountry(int index, String countryName) {
@@ -36,7 +36,7 @@ class _CountryListState extends State<CountryListPage> {
       Countries.bannedCountries.removeAt(index);
     });
 
-    SnackBarHelper.showSnackBar(context, '$countryName has been banned.');
+    SnackBarHelper.showSnackBar(context, '$countryName is now an allowed.');
   }
 
   //endregion

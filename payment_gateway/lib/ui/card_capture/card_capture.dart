@@ -65,14 +65,18 @@ class _CardCapturePageState extends State<CardCapturePage> {
     }
 
     if (await _checkIfCardExits(myCardDetails)) {
-      SnackBarHelper.showSnackBar(context, 'Card details already exist');
+      SnackBarHelper.showSnackBar(context, 'Card details already exist.');
     }
 
     storage
         .write(myCardDetails.number, jsonEncode(myCardDetails.toJson()))
-        .then((value) => SnackBarHelper.showSnackBar(
-            context, 'Card details saved successfully.'))
-        .catchError((error) => SnackBarHelper.showSnackBar(
+        .then((value) {
+          myCardDetails = MyCardDetails('', '', '', '');
+          _numberField.controller.clear();
+          _cvvField.controller.clear();
+          _addressField.controller.clear();
+      SnackBarHelper.showSnackBar(context, 'Card details saved successfully.');
+    }).catchError((error) => SnackBarHelper.showSnackBar(
             context, 'Error occurred while saving card details.'));
   }
 

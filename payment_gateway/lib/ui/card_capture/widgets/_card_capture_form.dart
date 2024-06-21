@@ -25,6 +25,7 @@ class CardCaptureForm extends StatefulWidget {
   State<CardCaptureForm> createState() => _CardCaptureFormState();
 }
 
+// Note: What about making this a dynamic form that can be used for any form?
 class _CardCaptureFormState extends State<CardCaptureForm> {
   @override
   Widget build(BuildContext context) {
